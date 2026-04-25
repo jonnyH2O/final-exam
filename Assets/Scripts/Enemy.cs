@@ -2,49 +2,61 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Inspector Fields 
     [SerializeField] private ElementType element;
     [SerializeField] private float speed = 2f;
 
-    // Private Fields 
-    private Renderer rend;
-    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
+    private Renderer _rend; // Cache the renderer for color changes
+    private WaveManager _waveManager; // Reference to the WaveManager to notify when removed
+    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor"); 
+    private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
 
-    // Public Properties 
-    public ElementType Element => element;
+    public ElementType Element => element; 
+    public EnemyType EnemyType { get; private set; }
+
+    private void Awake()
+    {
+        _rend = GetComponent<Renderer>(); 
+        _waveManager = FindFirstObjectByType<WaveManager>(); 
+    }
 
     private void Start()
     {
-        rend = GetComponent<Renderer>();
-        // Temp visual to differentiate enemy types, we can replace this with proper art later
-        rend.material.color = element switch
-        {
-            ElementType.Fire    => new Color(1f, 0.25f, 0f),
-            ElementType.Water   => new Color(0f, 0.5f, 1f),
-            ElementType.Nature  => new Color(0.1f, 0.8f, 0.1f),
-            ElementType.Shadow  => new Color(0.3f, 0f, 0.5f),
-            _ => Color.white
-        };
+        ApplyElementColor();
     }
+
     private void Update()
     {
-        // Move enemy across the screen from right to left
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
-    // Public Methods 
+    public void SetElement(ElementType newElement)
+    {
+        element = newElement;
+        ApplyElementColor();
+    }
+
+    public void SetSpeed(float newSpeed) => speed = newSpeed;
+
+    public void SetEnemyType(EnemyType type) => EnemyType = type;
+
     public void SetHighlight(bool on)
     {
-        // Toggles highlight by enabling/disabling emission on the material
-        // This is a temporary visual effect to show target, we can replace it with something more polished later
-        if (on)
+        _rend.material.EnableKeyword("_EMISSION");
+        _rend.material.SetColor(EmissionColor, on ? Color.yellow * 2f : Color.black);
+    }
+
+    public void Remove() => _waveManager.NotifyEnemyRemoved(gameObject); // Return to pool, not destroy
+
+    private void ApplyElementColor()
+    {
+        Color c = element switch
         {
-            rend.material.EnableKeyword("_EMISSION");
-            rend.material.SetColor(EmissionColor, Color.yellow * 2f);
-        }
-        else
-        {
-            rend.material.DisableKeyword("_EMISSION");
-        }
+            ElementType.Fire   => new Color(1f, 0.25f, 0f),
+            ElementType.Water  => new Color(0f, 0.5f, 1f),
+            ElementType.Nature => new Color(0.1f, 0.8f, 0.1f),
+            ElementType.Shadow => new Color(0.3f, 0f, 0.5f),
+            _                  => Color.white
+        };
+        _rend.material.SetColor(BaseColor, c);
     }
 }
