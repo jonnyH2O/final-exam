@@ -8592,11 +8592,11 @@ MonoBehaviour:
     - <color=red>Fire</color>
 
     <mark=#2B2B2B padding="8,4,8,4"><b>2</b></mark>/<mark=#2B2B2B
-    padding="8,4,8,4"><b>W</b></mark> - <color=lightblue>Water</color>
+    padding="8,4,8,4"><b>W</b></mark> - <color=yellow>Lightning</color>
 
     <mark=#2B2B2B
     padding="8,4,8,4"><b>3</b></mark>/<mark=#2B2B2B padding="8,4,8,4"><b>E</b></mark>
-    - <color=yellow>Lightning</color>
+    - <color=lightblue>Water</color>
 
     <mark=#2B2B2B padding="8,4,8,4"><b>4</b></mark>/<mark=#2B2B2B
     padding="8,4,8,4"><b>R</b></mark> - Radiant'
