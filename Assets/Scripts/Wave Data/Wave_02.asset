@@ -15,8 +15,8 @@ MonoBehaviour:
   enemyEntries:
   - enemyType: 0
     count: 10
-  allowedElements: 00000000
-  enemySpeed: 10
-  spawnInterval: 0.25
+  allowedElements: 0200000001000000
+  enemySpeed: 4
+  spawnInterval: 2
   waveDelay: 3
-  waveStartMessage: What about... THIS!
+  waveStartMessage: Now Use Lightning On Water!
