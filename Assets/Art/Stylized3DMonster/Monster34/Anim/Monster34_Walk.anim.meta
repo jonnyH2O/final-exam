@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 22463726afa28b44f94f3ce290b142c3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 360598
+  packageName: "Fantasy Monster 34 (Rig + Animation) \u2013 PixeliusVita"
+  packageVersion: 1.0
+  assetPath: Assets/Stylized3DMonster/Monster34/Anim/Monster34_Walk.anim
+  uploadId: 898576

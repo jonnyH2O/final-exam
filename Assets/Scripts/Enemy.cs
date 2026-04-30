@@ -5,23 +5,30 @@ public class Enemy : MonoBehaviour
     [SerializeField] private ElementType element;
     [SerializeField] private float speed = 2f;
 
-    private Renderer _rend; // Cache the renderer for color changes
-    private WaveManager _waveManager; // Reference to the WaveManager to notify when removed
-    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor"); 
-    private static readonly int BaseColor = Shader.PropertyToID("_BaseColor");
+    [SerializeField] private Material _fireMaterial;
+    [SerializeField] private Material _waterMaterial;
+    [SerializeField] private Material _natureMaterial;
+    [SerializeField] private Material _shadowMaterial;
 
-    public ElementType Element => element; 
+    private SkinnedMeshRenderer _meshRenderer;
+    private MaterialPropertyBlock _mpb;
+    private WaveManager _waveManager;
+    private static readonly int OutlineColor = Shader.PropertyToID("_OutlineColor");
+    private static readonly int OutlineWidth = Shader.PropertyToID("_OutlineWidth");
+
+    public ElementType Element => element;
     public EnemyType EnemyType { get; private set; }
 
     private void Awake()
     {
-        _rend = GetComponent<Renderer>(); 
-        _waveManager = FindFirstObjectByType<WaveManager>(); 
+        _meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
+        _mpb = new MaterialPropertyBlock();
+        _waveManager = FindFirstObjectByType<WaveManager>();
     }
 
     private void Start()
     {
-        ApplyElementColor();
+        ApplyElementMaterial();
     }
 
     private void Update()
@@ -32,7 +39,7 @@ public class Enemy : MonoBehaviour
     public void SetElement(ElementType newElement)
     {
         element = newElement;
-        ApplyElementColor();
+        ApplyElementMaterial();
     }
 
     public void SetSpeed(float newSpeed) => speed = newSpeed;
@@ -41,22 +48,35 @@ public class Enemy : MonoBehaviour
 
     public void SetHighlight(bool on)
     {
-        _rend.material.EnableKeyword("_EMISSION");
-        _rend.material.SetColor(EmissionColor, on ? Color.yellow * 2f : Color.black);
+        _meshRenderer.GetPropertyBlock(_mpb);
+        _mpb.SetColor(OutlineColor, on ? Color.white : Color.black);
+        _mpb.SetFloat(OutlineWidth, on ? 0.03f : 0.01f);
+        _meshRenderer.SetPropertyBlock(_mpb);
     }
+    public void Remove() => _waveManager.NotifyEnemyRemoved(gameObject);
 
-    public void Remove() => _waveManager.NotifyEnemyRemoved(gameObject); // Return to pool, not destroy
-
-    private void ApplyElementColor()
+    private void ApplyElementMaterial()
     {
-        Color c = element switch
+        // Swap the whole material asset — sharedMaterial avoids creating an instance
+        _meshRenderer.sharedMaterial = element switch
         {
-            ElementType.Fire   => new Color(1f, 0.25f, 0f),
-            ElementType.Water  => new Color(0f, 0.5f, 1f),
-            ElementType.Nature => new Color(0.1f, 0.8f, 0.1f),
-            ElementType.Shadow => new Color(0.3f, 0f, 0.5f),
-            _                  => Color.white
+            ElementType.Fire   => _fireMaterial,
+            ElementType.Water  => _waterMaterial,
+            ElementType.Nature => _natureMaterial,
+            ElementType.Shadow => _shadowMaterial,
+            _                  => _fireMaterial
         };
-        _rend.material.SetColor(BaseColor, c);
     }
+
+    public void Initialize(ElementType newElement, float newSpeed, Vector3 spawnPosition)
+    {
+        transform.position = spawnPosition;
+        SetElement(newElement);
+        SetSpeed(newSpeed);
+
+        // Random offset so enemies don't animate in sync
+        Animator anim = GetComponentInChildren<Animator>();
+        anim.Play(0, -1, Random.value);
+    }
+
 }
