@@ -994,7 +994,7 @@ Transform:
   m_GameObject: {fileID: 209084488}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.5, z: -7.75}
+  m_LocalPosition: {x: 7, y: 0, z: -7.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2135,7 +2135,7 @@ Transform:
   m_GameObject: {fileID: 478924563}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 7, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4577,7 +4577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
   poolEntries:
   - enemyType: 0
-    prefab: {fileID: 7280445952588560675, guid: 59016c2aefb5c824ab48a13ed443fdaa, type: 3}
+    prefab: {fileID: 2979958933507235093, guid: 2af92e6ea4ec7ea4c9d47ed3f04d134b, type: 3}
     defaultCapacity: 10
     maxSize: 20
 --- !u!4 &962571711
@@ -6410,7 +6410,7 @@ Transform:
   m_GameObject: {fileID: 1435121857}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.5, z: -2}
+  m_LocalPosition: {x: 7, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7620,7 +7620,7 @@ Transform:
   m_GameObject: {fileID: 1686869143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.5, z: -4.75}
+  m_LocalPosition: {x: 7, y: 0, z: -4.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8164,7 +8164,7 @@ Transform:
   m_GameObject: {fileID: 1861314574}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7, y: 0.5, z: 2.75}
+  m_LocalPosition: {x: 7, y: 0, z: 2.75}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
