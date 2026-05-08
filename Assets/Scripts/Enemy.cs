@@ -50,7 +50,7 @@ public class Enemy : MonoBehaviour
     {
         _meshRenderer.GetPropertyBlock(_mpb);
         _mpb.SetColor(OutlineColor, on ? Color.white : Color.black);
-        _mpb.SetFloat(OutlineWidth, on ? 0.03f : 0.01f);
+        _mpb.SetFloat(OutlineWidth, on ? 0.03f : 0.00f);
         _meshRenderer.SetPropertyBlock(_mpb);
     }
     public void Remove() => _waveManager.NotifyEnemyRemoved(gameObject);
