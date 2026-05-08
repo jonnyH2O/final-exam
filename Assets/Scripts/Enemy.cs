@@ -33,6 +33,8 @@ public class Enemy : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.IsPaused)
+            return;
         transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 

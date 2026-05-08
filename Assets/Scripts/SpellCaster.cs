@@ -24,13 +24,32 @@ public class SpellCaster : MonoBehaviour
         if (cast == null) return;
 
         // Get the current target from the TargetManager
-        Enemy target = TargetManager.Instance.CurrentTarget; 
-        if (target == null) return;
+        Enemy target = null;
+
+        if (TutorialManager.Instance != null &&
+            TutorialManager.Instance.TutorialActive)
+        {
+            target = TutorialManager.Instance.CurrentTutorialEnemy;
+        }
+        else if (TargetManager.Instance != null)
+        {
+            target = TargetManager.Instance.CurrentTarget;
+        }
+
+        if (target == null)
+            return;
 
         // Check if the cast spell counters the target's element
         SpellType required = counters[target.Element];
         if (cast == required)
+        {
             target.Remove(); // If correct spell is cast, remove the enemy
+            if (TutorialManager.Instance.TutorialActive)
+            {
+                TutorialManager.Instance.CompleteTutorial();
+            }
+
+        }
         else
             Debug.Log("Fizzle!"); // If wrong, fizzle
     }

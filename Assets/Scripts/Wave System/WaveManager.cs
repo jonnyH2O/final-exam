@@ -79,6 +79,8 @@ public class WaveManager : MonoBehaviour
         enemy.SetEnemyType(type);
         enemy.Initialize(element, data.enemySpeed, spawnPoints[lane].position);
 
+        TutorialManager.Instance.TryStartTutorial(enemy);
+
         _activeEnemyCount++;
     }
 
