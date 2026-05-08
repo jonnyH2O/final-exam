@@ -19,4 +19,4 @@ MonoBehaviour:
   enemySpeed: 5
   spawnInterval: 1
   waveDelay: 3
-  waveStartMessage: Now All Elements!
+  waveStartMessage: '"The elementals grow more aggressive..."'

@@ -19,4 +19,4 @@ MonoBehaviour:
   enemySpeed: 5
   spawnInterval: 2
   waveDelay: 3
-  waveStartMessage: Now There Are Fire Enemies!
+  waveStartMessage: '"Professor Varn watches silently..."'

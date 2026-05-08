@@ -19,4 +19,4 @@ MonoBehaviour:
   enemySpeed: 3
   spawnInterval: 2
   waveDelay: 2
-  waveStartMessage: Just Nature! Press Q To Cast FIRE!
+  waveStartMessage: '"The practice exam begins..."'

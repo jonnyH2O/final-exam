@@ -19,4 +19,4 @@ MonoBehaviour:
   enemySpeed: 4
   spawnInterval: 2
   waveDelay: 3
-  waveStartMessage: Now Use Lightning On Water!
+  waveStartMessage: '"The forest stirs with unstable mana..."'
