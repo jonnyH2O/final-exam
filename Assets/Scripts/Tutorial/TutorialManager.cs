@@ -45,7 +45,7 @@ public class TutorialManager : MonoBehaviour
 
         SetupTutorial(enemy);
 
-        GameManager.IsPaused = true;
+        Time.timeScale = 0f;
 
         enemy.SetHighlight(true);
     }
@@ -122,6 +122,6 @@ public class TutorialManager : MonoBehaviour
 
         tutorialOverlay.SetActive(false);
 
-        GameManager.IsPaused = false;
+        Time.timeScale = 1f;
     }
 }

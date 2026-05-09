@@ -13,6 +13,10 @@ public class Enemy : MonoBehaviour
     private SkinnedMeshRenderer _meshRenderer;
     private MaterialPropertyBlock _mpb;
     private WaveManager _waveManager;
+    private Animator _animator;
+
+    private bool _tutorialTriggered = false;
+
     private static readonly int OutlineColor = Shader.PropertyToID("_OutlineColor");
     private static readonly int OutlineWidth = Shader.PropertyToID("_OutlineWidth");
 
@@ -24,10 +28,15 @@ public class Enemy : MonoBehaviour
         _meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
         _mpb = new MaterialPropertyBlock();
         _waveManager = FindFirstObjectByType<WaveManager>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
-    private void Start()
+    private void OnEnable()
     {
+        // Reset pooled state
+        _tutorialTriggered = false;
+
+        // Re-apply correct material after pooling reuse
         ApplyElementMaterial();
     }
 
@@ -35,7 +44,23 @@ public class Enemy : MonoBehaviour
     {
         if (GameManager.IsPaused)
             return;
+
         transform.Translate(Vector3.left * speed * Time.deltaTime);
+
+        if (!_tutorialTriggered && transform.position.x < 8f)
+        {
+            _tutorialTriggered = true;
+
+            if (TutorialManager.Instance != null)
+            {
+                TutorialManager.Instance.TryStartTutorial(this);
+            }
+        }
+    }
+
+    public void SetEnemyType(EnemyType type)
+    {
+        EnemyType = type;
     }
 
     public void SetElement(ElementType newElement)
@@ -46,39 +71,48 @@ public class Enemy : MonoBehaviour
 
     public void SetSpeed(float newSpeed) => speed = newSpeed;
 
-    public void SetEnemyType(EnemyType type) => EnemyType = type;
-
     public void SetHighlight(bool on)
     {
+        if (_meshRenderer == null) return;
+
         _meshRenderer.GetPropertyBlock(_mpb);
         _mpb.SetColor(OutlineColor, on ? Color.white : Color.black);
         _mpb.SetFloat(OutlineWidth, on ? 0.03f : 0.00f);
         _meshRenderer.SetPropertyBlock(_mpb);
     }
-    public void Remove() => _waveManager.NotifyEnemyRemoved(gameObject);
+
+    public void Remove()
+    {
+        _waveManager?.NotifyEnemyRemoved(gameObject);
+    }
 
     private void ApplyElementMaterial()
     {
-        // Swap the whole material asset — sharedMaterial avoids creating an instance
+        if (_meshRenderer == null) return;
+
         _meshRenderer.sharedMaterial = element switch
         {
-            ElementType.Fire   => _fireMaterial,
-            ElementType.Water  => _waterMaterial,
+            ElementType.Fire => _fireMaterial,
+            ElementType.Water => _waterMaterial,
             ElementType.Nature => _natureMaterial,
             ElementType.Shadow => _shadowMaterial,
-            _                  => _fireMaterial
+            _ => _fireMaterial
         };
     }
 
     public void Initialize(ElementType newElement, float newSpeed, Vector3 spawnPosition)
     {
         transform.position = spawnPosition;
-        SetElement(newElement);
+
+        _tutorialTriggered = false;
+
+        SetElement(newElement);   
         SetSpeed(newSpeed);
 
-        // Random offset so enemies don't animate in sync
-        Animator anim = GetComponentInChildren<Animator>();
-        anim.Play(0, -1, Random.value);
+        // Random animation offset so enemies don't sync
+        if (_animator != null)
+        {
+            _animator.Play(0, -1, Random.value);
+        }
     }
-
 }

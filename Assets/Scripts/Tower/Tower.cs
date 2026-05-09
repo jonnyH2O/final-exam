@@ -24,12 +24,20 @@ public class Tower : MonoBehaviour
             currentHP = 0;
             GameOver();
         }
+
+        if (ScoreManager.Instance != null)
+        {
+            ScoreManager.Instance.RegisterDamage();
+        }
     }
 
     private void GameOver()
     {
         Debug.Log("Game Over");
-        // hook into GameManager
-        Time.timeScale = 0f; // pause game for now
+
+        if (GameUIManager.Instance != null)
+        {
+            GameUIManager.Instance.ShowGameOver();
+        }
     }
 }
