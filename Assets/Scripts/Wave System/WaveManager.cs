@@ -77,8 +77,7 @@ public class WaveManager : MonoBehaviour
         Enemy enemy = obj.GetComponent<Enemy>();
         ElementType element = data.allowedElements[Random.Range(0, data.allowedElements.Count)];
         enemy.SetEnemyType(type);
-        enemy.SetElement(element);
-        enemy.SetSpeed(data.enemySpeed);
+        enemy.Initialize(element, data.enemySpeed, spawnPoints[lane].position);
 
         _activeEnemyCount++;
     }

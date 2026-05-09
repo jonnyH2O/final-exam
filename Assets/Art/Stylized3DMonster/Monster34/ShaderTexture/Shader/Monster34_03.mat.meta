@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 953cc97f26484324e9f4871029bf0f3c
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 360598
+  packageName: "Fantasy Monster 34 (Rig + Animation) \u2013 PixeliusVita"
+  packageVersion: 1.0
+  assetPath: Assets/Stylized3DMonster/Monster34/ShaderTexture/Shader/Monster34_03.mat
+  uploadId: 898576

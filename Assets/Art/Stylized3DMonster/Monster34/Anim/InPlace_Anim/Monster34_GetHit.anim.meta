@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 16e1d3eb8af91bc4b9ac96dbcf1500f3
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 360598
+  packageName: "Fantasy Monster 34 (Rig + Animation) \u2013 PixeliusVita"
+  packageVersion: 1.0
+  assetPath: Assets/Stylized3DMonster/Monster34/Anim/InPlace_Anim/Monster34_GetHit.anim
+  uploadId: 898576
