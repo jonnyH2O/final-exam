@@ -62,8 +62,7 @@ public class SpellCaster : MonoBehaviour
             return;
         if (IsSpellLocked(cast.Value)) return;
 
-        // Get the current target from the TargetManager
-        Enemy target = TargetManager.Instance.CurrentTarget; 
+        // target was already assigned above
         if (target == null) return;
 
         // Check if the cast spell counters the target's element
@@ -96,9 +95,10 @@ public class SpellCaster : MonoBehaviour
                 ScoreManager.Instance.BreakCombo();
 
             Debug.Log("Fizzle!"); // If wrong, fizzle
-        }
             // Wrong spell, triggers a fizzle which starts, or restarts, lockout
             Fizzle(required);
+        }
+
     }
 
     private bool IsSpellLocked(SpellType spell)
