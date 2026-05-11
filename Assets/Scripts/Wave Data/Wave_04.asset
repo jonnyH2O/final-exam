@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9f1be790ce87154cbe3a2308e82bb5a, type: 3}
   m_Name: Wave_04
   m_EditorClassIdentifier: Assembly-CSharp::WaveData
+  hasGuaranteedIntroEnemy: 1
+  guaranteedIntroElement: 3
+  randomElementPool: 02000000010000000000000003000000
   enemyEntries:
   - enemyType: 0
-    count: 25
-  allowedElements: 00000000010000000200000003000000
+    count: 4
   enemySpeed: 5
   spawnInterval: 1
   waveDelay: 3
-  waveStartMessage: Now All Elements!
+  waveStartMessage: '"The elementals grow more aggressive..."'

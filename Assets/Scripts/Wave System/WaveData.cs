@@ -11,11 +11,15 @@ public class EnemySpawnEntry
 [CreateAssetMenu(fileName = "WaveData", menuName = "FinalExam/WaveData")]
 public class WaveData : ScriptableObject
 {
+    [Header("Tutorial Intro")]
+    public bool hasGuaranteedIntroEnemy;
+    public ElementType guaranteedIntroElement;
+
+    [Header("Random Pool")]
+    public ElementType[] randomElementPool;
+
     [Header("Enemies")]
     public List<EnemySpawnEntry> enemyEntries = new();
-
-    [Header("Allowed Elements")]
-    public List<ElementType> allowedElements;
 
     [Header("Spawn Settings")]
     public float enemySpeed = 2f;
@@ -25,5 +29,6 @@ public class WaveData : ScriptableObject
     public float waveDelay = 3f;
 
     [Header("Wave UI")]
+    [TextArea]
     public string waveStartMessage;
 }

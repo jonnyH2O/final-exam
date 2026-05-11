@@ -37,7 +37,7 @@ public class TargetManager : MonoBehaviour
     }
 
     // Private Methods
-    private void SetTarget(Enemy newTarget)
+    public void SetTarget(Enemy newTarget)
     {
         // Swaps the active target and updates highlight state on both old and new targets
         if (newTarget == currentTarget) return;
