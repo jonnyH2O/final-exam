@@ -75,7 +75,7 @@ public class ScoreManager : MonoBehaviour
     private void UpdateUI()
     {
         if (scoreText != null)
-            scoreText.text = $"Score: {score}";
+            scoreText.text = $"{score}pts";
 
         if (comboText != null)
             comboText.text = $"Combo x{combo}";
