@@ -51,6 +51,8 @@ public class SpellCaster : MonoBehaviour
         if (TutorialManager.Instance != null &&
             TutorialManager.Instance.TutorialActive)
         {
+            // Clears any active fizzles to prevent softlock
+            _spellLockouts.Clear();
             target = TutorialManager.Instance.CurrentTutorialEnemy;
         }
         else if (TargetManager.Instance != null)
