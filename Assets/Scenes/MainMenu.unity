@@ -1649,8 +1649,8 @@ MonoBehaviour:
   musicStartDelay: 0
   ambienceFadeInDuration: 1.5
   musicFadeInDuration: 2.5
-  ambienceTargetVolume: 0.02
-  musicTargetVolume: 0.03
+  ambienceTargetVolume: 0.15
+  musicTargetVolume: 0.07
 --- !u!4 &906494450
 Transform:
   m_ObjectHideFlags: 0

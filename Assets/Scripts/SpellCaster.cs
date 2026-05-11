@@ -90,7 +90,11 @@ public class SpellCaster : MonoBehaviour
             }
         }
         else
-        {
+        {   
+            // During Tutorial, block wrong input entirely, prevents all fizzle mechanics.
+            if (TutorialManager.Instance != null && TutorialManager.Instance.TutorialActive)
+                return;
+
             if (ScoreManager.Instance != null)
                 ScoreManager.Instance.BreakCombo();
 
@@ -103,14 +107,14 @@ public class SpellCaster : MonoBehaviour
 
     private bool IsSpellLocked(SpellType spell)
     {
-        return _spellLockouts.TryGetValue(spell, out float endTime) && Time.unscaledTime < endTime;
+        return _spellLockouts.TryGetValue(spell, out float endTime) && Time.time < endTime;
     }
 
     private void Fizzle(SpellType spellToLock)
     {
         
         // Start input lockout on correct spell
-        _spellLockouts[spellToLock] = Time.unscaledTime + fizzleLockoutDuration;
+        _spellLockouts[spellToLock] = Time.time + fizzleLockoutDuration;
 
         // Play the fizzle SFX.
         if (sfxSource != null && fizzleClip != null)

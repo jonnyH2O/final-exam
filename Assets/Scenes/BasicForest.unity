@@ -5265,7 +5265,7 @@ MonoBehaviour:
   ambienceFadeInDuration: 1.5
   musicFadeInDuration: 2.5
   ambienceTargetVolume: 0
-  musicTargetVolume: 0.03
+  musicTargetVolume: 0.07
 --- !u!4 &853288994
 Transform:
   m_ObjectHideFlags: 0
@@ -6602,6 +6602,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 376123727}
   levelCompleteScreen: {fileID: 1676398832}
   fullClearText: {fileID: 1712242662}
+  nextLevelDelay: 3
 --- !u!1001 &1057450343
 PrefabInstance:
   m_ObjectHideFlags: 0
