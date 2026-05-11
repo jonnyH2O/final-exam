@@ -103,14 +103,14 @@ public class SpellCaster : MonoBehaviour
 
     private bool IsSpellLocked(SpellType spell)
     {
-        return _spellLockouts.TryGetValue(spell, out float endTime) && Time.time < endTime;
+        return _spellLockouts.TryGetValue(spell, out float endTime) && Time.unscaledTime < endTime;
     }
 
     private void Fizzle(SpellType spellToLock)
     {
         
         // Start input lockout on correct spell
-        _spellLockouts[spellToLock] = Time.time + fizzleLockoutDuration;
+        _spellLockouts[spellToLock] = Time.unscaledTime + fizzleLockoutDuration;
 
         // Play the fizzle SFX.
         if (sfxSource != null && fizzleClip != null)
