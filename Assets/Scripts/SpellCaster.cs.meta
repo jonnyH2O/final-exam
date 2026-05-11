@@ -1,2 +1,13 @@
 fileFormatVersion: 2
 guid: 0ec0e5630b5c356448f4c27ebbf49fb2
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sfxSource: {instanceID: 0}
+  - fizzleClip: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
