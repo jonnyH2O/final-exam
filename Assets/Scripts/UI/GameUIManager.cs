@@ -16,7 +16,6 @@ public class GameUIManager : MonoBehaviour
 
     private void Awake()
     {
-
         Instance = this;
 
         gameOverScreen.SetActive(false);
@@ -59,14 +58,23 @@ public class GameUIManager : MonoBehaviour
         GameManager.IsPaused = false;
 
         int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+
         if (nextIndex < SceneManager.sceneCountInBuildSettings)
         {
-            SceneManager.LoadScene(nextIndex);
+            CinematicTransition.Instance.LoadSceneWithTransition(
+                SceneUtility.GetScenePathByBuildIndex(nextIndex)
+                    .Split('/')[^1]
+                    .Replace(".unity", ""),
+                "THE JOURNEY CONTINUES..."
+            );
         }
         else
         {
-            // No more levels — fall back to the main menu (build index 0)
-            SceneManager.LoadScene(0);
+            // No more levels — fall back to the main menu
+            CinematicTransition.Instance.LoadSceneWithTransition(
+                "MainMenu",
+                "PEACE RETURNS..."
+            );
         }
     }
 }

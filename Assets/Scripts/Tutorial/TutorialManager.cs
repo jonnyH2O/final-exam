@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class TutorialManager : MonoBehaviour
@@ -14,6 +15,12 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TMP_Text keybindText;
     [SerializeField] private TMP_Text flavorText;
 
+    [Header("Enemy Display")]
+    [SerializeField] private Enemy displayEnemyPrefab;
+    [SerializeField] private Transform displayPoint;
+
+    private Enemy displayEnemy;
+
     private HashSet<ElementType> seenElements = new();
 
     private Enemy currentTutorialEnemy;
@@ -27,10 +34,32 @@ public class TutorialManager : MonoBehaviour
         Instance = this;
 
         tutorialOverlay.SetActive(false);
+
+        if (displayEnemyPrefab != null)
+        {
+            displayEnemy = Instantiate(
+                displayEnemyPrefab,
+                displayPoint.position,
+                Quaternion.identity,
+                displayPoint
+            );
+
+            displayEnemy.transform.localPosition = Vector3.zero;
+            displayEnemy.transform.localRotation = Quaternion.identity;
+            displayEnemy.transform.localScale = Vector3.one * 150f;
+
+            displayEnemy.gameObject.SetActive(false);
+        }
     }
 
     public void TryStartTutorial(Enemy enemy)
     {
+        if (GameManager.IsPaused)
+        {
+            StartCoroutine(WaitAndRetry(enemy));
+            return;
+        }
+
         if (seenElements.Contains(enemy.Element))
             return;
 
@@ -45,13 +74,18 @@ public class TutorialManager : MonoBehaviour
 
         SetupTutorial(enemy);
 
-        Time.timeScale = 0f;
-
-        enemy.SetHighlight(true);
+        StartCoroutine(SlowTutorialIntro(enemy));
     }
 
     private void SetupTutorial(Enemy enemy)
     {
+        if (displayEnemy != null)
+        {
+            displayEnemy.gameObject.SetActive(true);
+
+            displayEnemy.SetVisualOnly(enemy.Element);
+        }
+
         switch (enemy.Element)
         {
             case ElementType.Fire:
@@ -116,12 +150,45 @@ public class TutorialManager : MonoBehaviour
         }
     }
 
+    private IEnumerator SlowTutorialIntro(Enemy enemy)
+    {
+        yield return new WaitForSecondsRealtime(0.25f);
+
+        Time.timeScale = 0f;
+
+        GameManager.IsPaused = true;
+
+        enemy.SetHighlight(true);
+    }
+
+    private IEnumerator WaitAndRetry(Enemy enemy)
+    {
+        while (GameManager.IsPaused)
+        {
+            yield return null;
+        }
+
+        TryStartTutorial(enemy);
+    }
+
     public void CompleteTutorial()
     {
         TutorialActive = false;
 
         tutorialOverlay.SetActive(false);
 
+        if (currentTutorialEnemy != null)
+        {
+            currentTutorialEnemy.SetHighlight(false);
+        }
+
+        if (displayEnemy != null)
+        {
+            displayEnemy.gameObject.SetActive(false);
+        }
+
         Time.timeScale = 1f;
+
+        GameManager.IsPaused = false;
     }
 }
