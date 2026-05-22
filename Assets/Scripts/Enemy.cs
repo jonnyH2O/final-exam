@@ -106,10 +106,20 @@ public class Enemy : MonoBehaviour
 
         _tutorialTriggered = false;
 
-        SetElement(newElement);   
+        SetElement(newElement);
         SetSpeed(newSpeed);
 
         // Random animation offset so enemies don't sync
+        if (_animator != null)
+        {
+            _animator.Play(0, -1, Random.value);
+        }
+    }
+
+    public void SetVisualOnly(ElementType newElement)
+    {
+        SetElement(newElement);
+
         if (_animator != null)
         {
             _animator.Play(0, -1, Random.value);

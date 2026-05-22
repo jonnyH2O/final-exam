@@ -5,15 +5,31 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame(string sceneName)
     {
-        // Temporarily hardcoded
-        SceneManager.LoadScene(sceneName);
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        if (CinematicTransition.Instance != null)
+        {
+            CinematicTransition.Instance.LoadSceneWithTransition(
+                sceneName,
+                "THE TRIAL BEGINS"
+            );
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
 
     public void LoadLevel(string sceneName)
     {
-        SceneManager.LoadScene(sceneName);
+        if (CinematicTransition.Instance != null)
+        {
+            CinematicTransition.Instance.LoadSceneWithTransition(
+                sceneName,
+                "A NEW BATTLE BEGINS"
+            );
+        }
+        else
+        {
+            SceneManager.LoadScene(sceneName);
+        }
     }
-
-
 }
