@@ -17,7 +17,6 @@ public class TutorialManager : MonoBehaviour
 
     [Header("Enemy Display")]
     [SerializeField] private Enemy displayEnemyPrefab;
-    [SerializeField] private Transform displayPoint;
 
     private Enemy displayEnemy;
 
@@ -37,16 +36,7 @@ public class TutorialManager : MonoBehaviour
 
         if (displayEnemyPrefab != null)
         {
-            displayEnemy = Instantiate(
-                displayEnemyPrefab,
-                displayPoint.position,
-                Quaternion.identity,
-                displayPoint
-            );
-
-            displayEnemy.transform.localPosition = Vector3.zero;
-            displayEnemy.transform.localRotation = Quaternion.identity;
-            displayEnemy.transform.localScale = Vector3.one * 150f;
+            displayEnemy = Instantiate(displayEnemyPrefab);
 
             displayEnemy.gameObject.SetActive(false);
         }

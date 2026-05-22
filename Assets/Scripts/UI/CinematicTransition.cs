@@ -11,6 +11,10 @@ public class CinematicTransition : MonoBehaviour
     [SerializeField] private CanvasGroup fadeCanvas;
     [SerializeField] private float fadeDuration = 1.5f;
 
+    [SerializeField]
+    private AnimationCurve fadeCurve =
+        AnimationCurve.EaseInOut(0, 0, 1, 1);
+
     [Header("Cinematic Text")]
     [SerializeField] private TMP_Text cinematicText;
     [SerializeField] private float textDuration = 2f;
@@ -88,7 +92,9 @@ public class CinematicTransition : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
 
-            fadeCanvas.alpha = Mathf.Lerp(0f, 1f, elapsed / fadeDuration);
+            float t = fadeCurve.Evaluate(elapsed / fadeDuration);
+
+            fadeCanvas.alpha = Mathf.Lerp(0f, 1f, t);
 
             yield return null;
         }
@@ -104,7 +110,9 @@ public class CinematicTransition : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
 
-            fadeCanvas.alpha = Mathf.Lerp(1f, 0f, elapsed / fadeDuration);
+            float t = fadeCurve.Evaluate(elapsed / fadeDuration);
+
+            fadeCanvas.alpha = Mathf.Lerp(1f, 0f, t);
 
             yield return null;
         }

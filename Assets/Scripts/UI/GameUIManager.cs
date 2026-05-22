@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class GameUIManager : MonoBehaviour
@@ -11,70 +12,177 @@ public class GameUIManager : MonoBehaviour
     [SerializeField] private GameObject levelCompleteScreen;
     [SerializeField] private GameObject fullClearText;
 
-    // CHANGED: how long the level complete screen stays up before loading the next scene
-    [SerializeField] private float nextLevelDelay = 3f;
+    [SerializeField] private TMP_Text retryText;
+    [SerializeField] private TMP_Text continueText;
+
+    private bool waitingForContinue;
+    private bool waitingForRetry;
 
     private void Awake()
     {
         Instance = this;
 
-        gameOverScreen.SetActive(false);
-        levelCompleteScreen.SetActive(false);
-        fullClearText.SetActive(false);
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+        if (levelCompleteScreen != null)
+            levelCompleteScreen.SetActive(false);
+
+        if (fullClearText != null)
+            fullClearText.SetActive(false);
+
+        if (retryText != null)
+        {
+            retryText.text =
+                "PRESS [SPACE] TO RETRY";
+        }
+
+        if (continueText != null)
+        {
+            continueText.text =
+                "PRESS [SPACE] TO CONTINUE";
+        }
+    }
+
+    private void Update()
+    {
+        bool spacePressed =
+            Keyboard.current != null &&
+            Keyboard.current.spaceKey.wasPressedThisFrame;
+
+        if (waitingForRetry && spacePressed)
+        {
+            waitingForRetry = false;
+
+            StartCoroutine(RestartCurrentLevel());
+        }
+
+        if (waitingForContinue && spacePressed)
+        {
+            waitingForContinue = false;
+
+            StartCoroutine(LoadNextLevel());
+        }
     }
 
     public void ShowGameOver()
     {
         GameManager.IsPaused = true;
 
-        gameOverScreen.SetActive(true);
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(true);
+
+        if (levelCompleteScreen != null)
+            levelCompleteScreen.SetActive(false);
+
+        if (fullClearText != null)
+            fullClearText.SetActive(false);
+
+        waitingForRetry = true;
+        waitingForContinue = false;
     }
 
     public void ShowLevelComplete()
     {
         GameManager.IsPaused = true;
 
-        levelCompleteScreen.SetActive(true);
+        if (levelCompleteScreen != null)
+            levelCompleteScreen.SetActive(true);
 
-        if (ScoreManager.Instance != null &&
-            ScoreManager.Instance.FullClear)
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+        if (fullClearText != null)
         {
-            fullClearText.SetActive(true);
-        }
-        else
-        {
-            fullClearText.SetActive(false);
+            bool fullClear =
+                ScoreManager.Instance != null &&
+                ScoreManager.Instance.FullClear;
+
+            fullClearText.SetActive(fullClear);
         }
 
-        // CHANGED: queue the next level load after a short delay so the player can see the screen
-        StartCoroutine(LoadNextLevelAfterDelay());
+        waitingForContinue = true;
+        waitingForRetry = false;
     }
 
-    // CHANGED: waits in realtime (immune to Time.timeScale) then loads the next scene by build index
-    private IEnumerator LoadNextLevelAfterDelay()
+    private IEnumerator RestartCurrentLevel()
     {
-        yield return new WaitForSecondsRealtime(nextLevelDelay);
+        if (gameOverScreen != null)
+            gameOverScreen.SetActive(false);
+
+        if (levelCompleteScreen != null)
+            levelCompleteScreen.SetActive(false);
+
+        if (fullClearText != null)
+            fullClearText.SetActive(false);
+
+        yield return new WaitForSecondsRealtime(0.1f);
 
         GameManager.IsPaused = false;
 
-        int nextIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        string currentScene =
+            SceneManager.GetActiveScene().name;
 
-        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        if (CinematicTransition.Instance != null)
         {
             CinematicTransition.Instance.LoadSceneWithTransition(
-                SceneUtility.GetScenePathByBuildIndex(nextIndex)
-                    .Split('/')[^1]
-                    .Replace(".unity", ""),
-                "THE JOURNEY CONTINUES..."
+                currentScene,
+                "TRY AGAIN..."
             );
         }
         else
         {
-            // No more levels — fall back to the main menu
-            CinematicTransition.Instance.LoadSceneWithTransition(
-                "MainMenu",
-                "PEACE RETURNS..."
-            );
+            SceneManager.LoadScene(currentScene);
+        }
+    }
+
+    private IEnumerator LoadNextLevel()
+    {
+        if (levelCompleteScreen != null)
+            levelCompleteScreen.SetActive(false);
+
+        if (fullClearText != null)
+            fullClearText.SetActive(false);
+
+        yield return new WaitForSecondsRealtime(0.1f);
+
+        GameManager.IsPaused = false;
+
+        int nextIndex =
+            SceneManager.GetActiveScene().buildIndex + 1;
+
+        if (nextIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            string nextScene =
+                SceneUtility.GetScenePathByBuildIndex(nextIndex)
+                .Split('/')[^1]
+                .Replace(".unity", "");
+
+            if (CinematicTransition.Instance != null)
+            {
+                CinematicTransition.Instance.LoadSceneWithTransition(
+                    nextScene,
+                    "VENTURING DEEPER INTO THE FOREST..."
+                );
+            }
+            else
+            {
+                SceneManager.LoadScene(nextScene);
+            }
+        }
+        else
+        {
+            if (CinematicTransition.Instance != null)
+            {
+                CinematicTransition.Instance.LoadSceneWithTransition(
+                    "MainMenu",
+                    "PEACE RETURNS..."
+                );
+            }
+            else
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 }
