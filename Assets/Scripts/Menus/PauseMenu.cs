@@ -4,9 +4,23 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject container; // Reference to the pause menu container
+    private float levelStartTime;
+
+    private void Start()
+    {
+        levelStartTime = Time.time;
+    }
 
     void Update()
     {
+        // Disable pause menu for the first 3 seconds
+        if (Time.time - levelStartTime < 3f)
+            return;
+
+        // Don't allow pause/resume if tutorial is active
+        if (TutorialManager.Instance != null && TutorialManager.Instance.TutorialActive)
+            return;
+
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
             if (GameManager.IsPaused)
