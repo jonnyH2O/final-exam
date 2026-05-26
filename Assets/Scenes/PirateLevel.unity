@@ -1376,7 +1376,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: b818bff8037917d4b882968650c62d82, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -3617,8 +3617,8 @@ MonoBehaviour:
   musicStartDelay: 0
   ambienceFadeInDuration: 1.5
   musicFadeInDuration: 2.5
-  ambienceTargetVolume: 0
-  musicTargetVolume: 0.07
+  ambienceTargetVolume: 0.05
+  musicTargetVolume: 0.03
 --- !u!4 &853288994
 Transform:
   m_ObjectHideFlags: 0
@@ -8085,7 +8085,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: da8e09185e3877f40b758b8d8c004f3a, type: 3}
+  m_Resource: {fileID: 8300000, guid: e39f5438a5b7e4e4c8a066b230a0a872, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

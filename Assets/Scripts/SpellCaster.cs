@@ -11,6 +11,18 @@ public class SpellCaster : MonoBehaviour
     [Tooltip("Sound played when the player casts the wrong spell.")]
     [SerializeField] private AudioClip fizzleClip;
 
+    [Tooltip("Sound played when Fire is cast correctly (against Nature enemies).")]
+    [SerializeField] private AudioClip fireClip;
+
+    [Tooltip("Sound played when Lightning is cast correctly (against Water enemies).")]
+    [SerializeField] private AudioClip lightningClip;
+
+    [Tooltip("Sound played when Water is cast correctly (against Fire enemies).")]
+    [SerializeField] private AudioClip waterClip;
+
+    [Tooltip("Sound played when Radiant is cast correctly (against Shadow enemies).")]
+    [SerializeField] private AudioClip radiantClip;
+
     [Header("Fizzle Lockout")]
     [Tooltip("Seconds that spell input is ignored after a wrong cast.")]
     [SerializeField] private float fizzleLockoutDuration = 3f;
@@ -77,6 +89,12 @@ public class SpellCaster : MonoBehaviour
                 TutorialManager.Instance != null &&
                 TutorialManager.Instance.TutorialActive;
 
+            // Play spell specific sound on a correct cast.
+            // Fizzle sound is on wrong cast only, shouldn't overlap
+            AudioClip spellClip = GetClipForSpell(cast.Value);
+            if (sfxSource != null && spellClip != null)
+                sfxSource.PlayOneShot(spellClip);
+
             target.Remove(); // If correct spell is cast, remove the enemy
 
             // Only award score/combo for normal enemies, not tutorial enemies
@@ -105,6 +123,18 @@ public class SpellCaster : MonoBehaviour
             Fizzle(required);
         }
 
+    }
+
+    private AudioClip GetClipForSpell(SpellType spell)
+    {
+        return spell switch
+        {
+            SpellType.Fire => fireClip,
+            SpellType.Lightning => lightningClip,
+            SpellType.Water => waterClip,
+            SpellType.Radiant => radiantClip,
+            _                   => null
+        };
     }
 
     private bool IsSpellLocked(SpellType spell)
