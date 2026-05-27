@@ -152,6 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sfxSource: {fileID: 1533043}
   fizzleClip: {fileID: 8300000, guid: 43b2eda9d9df3c049b055b2aeb171feb, type: 3}
+  fireClip: {fileID: 0}
+  lightningClip: {fileID: 0}
+  waterClip: {fileID: 0}
+  radiantClip: {fileID: 0}
   fizzleLockoutDuration: 1
 --- !u!114 &1533041
 MonoBehaviour:
@@ -1526,6 +1530,7 @@ MonoBehaviour:
   instructionText: {fileID: 732400687}
   keybindText: {fileID: 916608598}
   flavorText: {fileID: 1666010829}
+  displayEnemyPrefab: {fileID: 0}
 --- !u!1001 &358056294
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2612,6 +2617,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591071081}
   m_CullTransparentMesh: 1
+--- !u!1 &591084739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591084741}
+  - component: {fileID: 591084740}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &591084740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591084739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58fd97a3b904dfa49990c8cdf412229c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LegacyLightingGlobals
+  mainLight: {fileID: 1108423332}
+--- !u!4 &591084741
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591084739}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.03047, y: -0.09227, z: -1.49936}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &602590140
 GameObject:
   m_ObjectHideFlags: 0
@@ -4595,7 +4645,8 @@ MonoBehaviour:
   gameOverScreen: {fileID: 376123727}
   levelCompleteScreen: {fileID: 1676398832}
   fullClearText: {fileID: 1712242662}
-  nextLevelDelay: 3
+  retryText: {fileID: 0}
+  continueText: {fileID: 0}
 --- !u!4 &1083118841 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2742810045699080098, guid: d4effc3173a6c084ab1e0f9cf40a072c, type: 3}
@@ -9417,3 +9468,4 @@ SceneRoots:
   - {fileID: 761185699}
   - {fileID: 853288994}
   - {fileID: 1450749797}
+  - {fileID: 591084741}
