@@ -2951,11 +2951,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efe11954983540544b6f5b28430b168c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TutorialManager
-  tutorialOverlay: {fileID: 0}
-  enemyTitle: {fileID: 0}
-  instructionText: {fileID: 0}
-  keybindText: {fileID: 0}
-  flavorText: {fileID: 0}
+  tutorialOverlay: {fileID: 746188606}
+  enemyTitle: {fileID: 1389137769}
+  instructionText: {fileID: 1262267100}
+  keybindText: {fileID: 933526948}
+  flavorText: {fileID: 290108482}
   displayEnemyPrefab: {fileID: 1268503777658752420, guid: 2af92e6ea4ec7ea4c9d47ed3f04d134b, type: 3}
 --- !u!1 &350275889
 GameObject:
@@ -7808,11 +7808,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ed61d51176609f4ab95586f2b2891b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameUIManager
-  gameOverScreen: {fileID: 0}
-  levelCompleteScreen: {fileID: 0}
-  fullClearText: {fileID: 0}
-  retryText: {fileID: 0}
-  continueText: {fileID: 0}
+  gameOverScreen: {fileID: 806869297}
+  levelCompleteScreen: {fileID: 468320129}
+  fullClearText: {fileID: 2090520935}
+  retryText: {fileID: 350275891}
+  continueText: {fileID: 290670452}
 --- !u!1001 &1057450343
 PrefabInstance:
   m_ObjectHideFlags: 0
