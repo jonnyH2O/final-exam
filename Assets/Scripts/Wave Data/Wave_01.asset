@@ -17,7 +17,7 @@ MonoBehaviour:
   randomElementPool: 02000000
   enemyEntries:
   - enemyType: 0
-    count: 3
+    count: 2
   enemySpeed: 3
   spawnInterval: 2
   waveDelay: 2

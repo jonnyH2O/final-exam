@@ -289,6 +289,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sfxSource: {fileID: 1533043}
   fizzleClip: {fileID: 8300000, guid: 43b2eda9d9df3c049b055b2aeb171feb, type: 3}
+  fireClip: {fileID: 0}
+  lightningClip: {fileID: 0}
+  waterClip: {fileID: 0}
+  radiantClip: {fileID: 0}
   fizzleLockoutDuration: 1
 --- !u!114 &1533041
 MonoBehaviour:
@@ -702,7 +706,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 239.34}
+  m_AnchoredPosition: {x: 0, y: 1543.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &70014610
@@ -9802,6 +9806,7 @@ MonoBehaviour:
   - {fileID: 209084489}
   waveMessageText: {fileID: 862049515}
   waveProgressUI: {fileID: 748144176}
+  autoStart: 1
 --- !u!4 &1552605850
 Transform:
   m_ObjectHideFlags: 0

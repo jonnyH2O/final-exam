@@ -2400,7 +2400,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 239.34}
+  m_AnchoredPosition: {x: 0, y: 973.89}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &319679787
@@ -10079,6 +10079,7 @@ MonoBehaviour:
   - {fileID: 209084489}
   waveMessageText: {fileID: 0}
   waveProgressUI: {fileID: 0}
+  autoStart: 0
 --- !u!4 &1552605850
 Transform:
   m_ObjectHideFlags: 0

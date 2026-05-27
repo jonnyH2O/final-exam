@@ -9,6 +9,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private TextMeshProUGUI waveMessageText;
     [SerializeField] private WaveProgressUI waveProgressUI;
+    [SerializeField] private bool autoStart = false;
 
     private int _currentWaveIndex = 0;
 
@@ -16,6 +17,12 @@ public class WaveManager : MonoBehaviour
     private int _remaining = 0;
     private bool _waveTransitioning;
     private bool _waveActive;
+
+    private void Start()
+    {
+        if (autoStart)
+            StartWave();
+    }
 
     public void StartWave()
     {
