@@ -4,9 +4,23 @@ using UnityEngine;
 public class LegacyLightingGlobals : MonoBehaviour
 {
     [SerializeField] Light mainLight;
+    [SerializeField] Camera waterCamera;
 
-    void OnEnable()  { Push(); }
-    void Update()    { Push(); }
+    void OnEnable()  { EnsureDepthTexture(); Push(); }
+    void Update()    { EnsureDepthTexture(); Push(); }
+
+    // The LowPoly water shader's edge-blend samples _CameraDepthTexture. On WebGL the
+    // built-in pipeline doesn't render that texture automatically (no screen-space
+    // directional shadows), so the shader reads empty depth and blows the surface out
+    // to white. Forcing the camera to render a depth texture keeps the water blue.
+    void EnsureDepthTexture()
+    {
+        if (waterCamera == null) waterCamera = Camera.main;
+        if (waterCamera == null) return;
+
+        if ((waterCamera.depthTextureMode & DepthTextureMode.Depth) == 0)
+            waterCamera.depthTextureMode |= DepthTextureMode.Depth;
+    }
 
     void Push()
     {
