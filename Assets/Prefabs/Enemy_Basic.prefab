@@ -53,6 +53,11 @@ MonoBehaviour:
   _waterMaterial: {fileID: 2100000, guid: b26d2b7c661188c4291d457ab0f85f7d, type: 2}
   _natureMaterial: {fileID: 2100000, guid: b58ef656e03b28747bccfff2fa24036b, type: 2}
   _shadowMaterial: {fileID: 2100000, guid: dbd4270316fd090489190b2e2f2950e4, type: 2}
+  _fireHitEffect: {fileID: 4924508274929071776, guid: 0edef91621bb6b34384ccc9dbb98729c, type: 3}
+  _waterHitEffect: {fileID: 2965222256817593503, guid: a164e676dbbd6e54587237e619372c98, type: 3}
+  _natureHitEffect: {fileID: 6823302871133167919, guid: 3138a83bedbd6ad4481ba0b061da2eb6, type: 3}
+  _shadowHitEffect: {fileID: 2944396702758532163, guid: e190bf97c041e58448af6b043116cba0, type: 3}
+  _effectLifetime: 3
 --- !u!136 &2456513730662458407
 CapsuleCollider:
   m_ObjectHideFlags: 0

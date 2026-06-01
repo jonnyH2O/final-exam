@@ -27,6 +27,14 @@ public class SpellCaster : MonoBehaviour
     [Tooltip("Seconds that spell input is ignored after a wrong cast.")]
     [SerializeField] private float fizzleLockoutDuration = 3f;
 
+    [Header("Fizzle VFX")]
+    [Tooltip("Effect spawned on the target when the wrong spell is cast (e.g. Smoke puff).")]
+    [SerializeField] private GameObject fizzleEffect;
+    [Tooltip("Scale multiplier for the fizzle effect. Below 1 = smaller puff.")]
+    [SerializeField] private float fizzleEffectScale = 0.5f;
+    [Tooltip("Playback speed for the fizzle effect. Above 1 = faster.")]
+    [SerializeField] private float fizzleEffectSpeed = 2f;
+
     
     private Dictionary<SpellType, float> _spellLockouts = new();
     // Define the counter relationships between elements and spells
@@ -95,7 +103,7 @@ public class SpellCaster : MonoBehaviour
             if (sfxSource != null && spellClip != null)
                 sfxSource.PlayOneShot(spellClip);
 
-            target.Remove(); // If correct spell is cast, remove the enemy
+            target.Die(); // Correct spell: play the element's hit VFX, then remove
 
             // Only award score/combo for normal enemies, not tutorial enemies
             if (!tutorialKill && ScoreManager.Instance != null)
@@ -117,6 +125,9 @@ public class SpellCaster : MonoBehaviour
 
             if (ScoreManager.Instance != null)
                 ScoreManager.Instance.BreakCombo();
+
+            // Quick, small smoke puff on the target to telegraph the miss.
+            target.PlayCenteredEffect(fizzleEffect, fizzleEffectScale, fizzleEffectSpeed);
 
             Debug.Log("Fizzle!"); // If wrong, fizzle
             // Wrong spell, triggers a fizzle which starts, or restarts, lockout

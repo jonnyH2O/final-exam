@@ -157,6 +157,9 @@ MonoBehaviour:
   waterClip: {fileID: 0}
   radiantClip: {fileID: 0}
   fizzleLockoutDuration: 1
+  fizzleEffect: {fileID: 4809171458859421548, guid: 4e91ed1a8efe7044785b9bd97a47d87f, type: 3}
+  fizzleEffectScale: 0.1
+  fizzleEffectSpeed: 2
 --- !u!114 &1533041
 MonoBehaviour:
   m_ObjectHideFlags: 0
