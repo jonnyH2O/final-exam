@@ -42,6 +42,7 @@ public class GameUIManager : MonoBehaviour
             continueText.text =
                 "PRESS [SPACE] TO CONTINUE";
         }
+
     }
 
     private void Update()
@@ -119,7 +120,7 @@ public class GameUIManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f);
 
         GameManager.IsPaused = false;
-
+        Time.timeScale = 1f;
         string currentScene =
             SceneManager.GetActiveScene().name;
 
