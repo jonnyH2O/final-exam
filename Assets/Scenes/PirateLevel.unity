@@ -156,6 +156,7 @@ MonoBehaviour:
   lightningClip: {fileID: 8300000, guid: 6fb01e2ca6174cf4795f190f67841c3a, type: 3}
   waterClip: {fileID: 8300000, guid: 83544a487d6e6844ea9889ba0879c33e, type: 3}
   radiantClip: {fileID: 8300000, guid: 46633a003c0a81b4eb109c85b4282c82, type: 3}
+  shieldBreakClip: {fileID: 8300000, guid: 9e3cd93e4f309534caec962fb9f98907, type: 3}
   fizzleLockoutDuration: 1
   fizzleEffect: {fileID: 4809171458859421548, guid: 4e91ed1a8efe7044785b9bd97a47d87f, type: 3}
   fizzleEffectScale: 0.1

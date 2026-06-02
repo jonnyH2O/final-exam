@@ -22,6 +22,9 @@ public class SpellCaster : MonoBehaviour
 
     [Tooltip("Sound played when Radiant is cast correctly (against Shadow enemies).")]
     [SerializeField] private AudioClip radiantClip;
+    
+    [Tooltip("Sound played when a Shielded enemy's shield is broken (not when it dies).")]
+    [SerializeField] private AudioClip shieldBreakClip;
 
     [Header("Fizzle Lockout")]
     [Tooltip("Seconds that spell input is ignored after a wrong cast.")]
@@ -97,15 +100,28 @@ public class SpellCaster : MonoBehaviour
                 TutorialManager.Instance != null &&
                 TutorialManager.Instance.TutorialActive;
 
-            // Play spell specific sound on a correct cast.
-            // Fizzle sound is on wrong cast only, shouldn't overlap
-            AudioClip spellClip = GetClipForSpell(cast.Value);
-            if (sfxSource != null && spellClip != null)
-                sfxSource.PlayOneShot(spellClip);
-
             // Some enemies survive a correct hit (shield) or transform without
             // dying (split). Only score / finish the tutorial on a real kill.
             bool killed = target.TakeCorrectHit();
+
+            if (sfxSource != null)
+            {
+                if (killed)
+                {
+                    // Play spell specific sound on an Enemy Death
+                    // Fizzle sound is on wrong cast only, shouldn't overlap
+                    AudioClip spellClip = GetClipForSpell(cast.Value);
+                    if (spellClip != null)
+                        sfxSource.PlayOneShot(spellClip);
+                }
+                else if (target.EnemyType == EnemyType.Shielded)
+                {
+                    // Shield is broken, enemy alive, only play shield break
+                    if (shieldBreakClip != null)
+                        sfxSource.PlayOneShot(shieldBreakClip);
+                }
+                
+            }
 
             // Only award score/combo for normal enemies, not tutorial enemies
             if (killed && !tutorialKill && ScoreManager.Instance != null)
@@ -165,6 +181,6 @@ public class SpellCaster : MonoBehaviour
         if (sfxSource != null && fizzleClip != null)
             sfxSource.PlayOneShot(fizzleClip);
 
-        Debug.Log("Fizzle! {spellToLock} locked for {fizzleLockoutDuration}s."); // If wrong, fizzle
+        Debug.Log($"Fizzle! {spellToLock} locked for {fizzleLockoutDuration}s."); // If wrong, fizzle
     }
 }
