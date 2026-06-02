@@ -87,11 +87,11 @@ public class SpellCaster : MonoBehaviour
         // target was already assigned above
         if (target == null) return;
 
-        // Check if the cast spell counters the target's element
-        if (!counters.TryGetValue(target.Element, out SpellType required))
-            return;
+        // Work out the spell this target needs. SplitEnemy accepts any spell.
+        counters.TryGetValue(target.Element, out SpellType required);
+        bool accepted = !target.RequiresMatchingSpell || cast == required;
 
-        if (cast == required)
+        if (accepted)
         {
             bool tutorialKill =
                 TutorialManager.Instance != null &&
@@ -103,16 +103,18 @@ public class SpellCaster : MonoBehaviour
             if (sfxSource != null && spellClip != null)
                 sfxSource.PlayOneShot(spellClip);
 
-            target.Die(); // Correct spell: play the element's hit VFX, then remove
+            // Some enemies survive a correct hit (shield) or transform without
+            // dying (split). Only score / finish the tutorial on a real kill.
+            bool killed = target.TakeCorrectHit();
 
             // Only award score/combo for normal enemies, not tutorial enemies
-            if (!tutorialKill && ScoreManager.Instance != null)
+            if (killed && !tutorialKill && ScoreManager.Instance != null)
             {
                 ScoreManager.Instance.AddKill();
             }
 
             // End the tutorial after the tutorial enemy is defeated
-            if (tutorialKill)
+            if (killed && tutorialKill)
             {
                 TutorialManager.Instance.CompleteTutorial();
             }

@@ -11,6 +11,9 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private WaveProgressUI waveProgressUI;
     [SerializeField] private bool autoStart = false;
 
+    // Exposed so ZoomEnemy can weave between this level's actual lanes.
+    public Transform[] SpawnPoints => spawnPoints;
+
     private int _currentWaveIndex = 0;
 
     private int _activeEnemyCount = 0;
@@ -176,6 +179,21 @@ public class WaveManager : MonoBehaviour
         _activeEnemyCount++;
     }
 
+    // Register an enemy spawned mid-wave (e.g. SplitEnemy children) so wave
+    // progress and completion stay accurate. Each registered enemy is expected
+    // to call NotifyEnemyRemoved later, balancing the count.
+    public void NotifyEnemySpawned()
+    {
+        if (!_waveActive)
+            return;
+
+        _activeEnemyCount++;
+        _remaining++;
+
+        if (waveProgressUI != null)
+            waveProgressUI.AddToTotal(1);
+    }
+
     public void NotifyEnemyRemoved(GameObject obj)
     {
         // Ignore removal if no wave is active or the object is invalid
@@ -190,9 +208,15 @@ public class WaveManager : MonoBehaviour
         // Read the type from the enemy so we return it to the correct pool
         EnemyType type = enemyComponent.EnemyType;
 
-        if (EnemyPool.Instance != null)
+        // Pooled enemies go back to the pool; runtime-spawned ones (split
+        // children) were never pooled, so destroy them instead.
+        if (enemyComponent.IsPooled && EnemyPool.Instance != null)
         {
             EnemyPool.Instance.Return(type, obj);
+        }
+        else
+        {
+            Destroy(obj);
         }
 
         _activeEnemyCount--;
