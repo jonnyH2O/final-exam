@@ -13196,7 +13196,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '[] Retry'
+  m_text: '[Space] Retry'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -13824,8 +13824,8 @@ MonoBehaviour:
   gameOverScreen: {fileID: 1913061164}
   levelCompleteScreen: {fileID: 2140285387}
   fullClearText: {fileID: 771490427}
-  retryText: {fileID: 0}
-  continueText: {fileID: 0}
+  retryText: {fileID: 1831220899}
+  continueText: {fileID: 1718711794}
 --- !u!1 &1927224108
 GameObject:
   m_ObjectHideFlags: 0

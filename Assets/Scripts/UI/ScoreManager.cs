@@ -21,14 +21,16 @@ public class ScoreManager : MonoBehaviour
 
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
         Instance = this;
-        ResetRun();
+        DontDestroyOnLoad(gameObject);
     }
 
-    private void OnEnable()
-    {
-        ResetRun();
-    }
 
     public void ResetRun()
     {

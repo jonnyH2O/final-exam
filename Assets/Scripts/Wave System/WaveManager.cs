@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private TextMeshProUGUI waveMessageText;
     [SerializeField] private WaveProgressUI waveProgressUI;
-    [SerializeField] private bool autoStart = false;
+    [SerializeField] private bool autoStart = true;
 
     // Exposed so ZoomEnemy can weave between this level's actual lanes.
     public Transform[] SpawnPoints => spawnPoints;
