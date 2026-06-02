@@ -23,6 +23,14 @@ public class WaveProgressUI : MonoBehaviour
         UpdateUI();
     }
 
+    // Grow the wave total when enemies are spawned mid-wave (split children).
+    public void AddToTotal(int amount)
+    {
+        totalEnemies += amount;
+
+        UpdateUI();
+    }
+
     private void UpdateUI()
     {
         progressBar.value =
