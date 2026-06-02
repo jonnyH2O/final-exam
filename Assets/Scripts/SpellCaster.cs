@@ -102,13 +102,13 @@ public class SpellCaster : MonoBehaviour
 
             // Some enemies survive a correct hit (shield) or transform without
             // dying (split). Only score / finish the tutorial on a real kill.
-            bool killed = target.TakeCorrectHit();
+            bool killed = target.TakeCorrectHit(cast.Value);
 
             if (sfxSource != null)
             {
-                if (killed)
+                if (killed || target.EnemyType == EnemyType.Split)
                 {
-                    // Play spell specific sound on an Enemy Death
+                    // Play spell specific sound on an Enemy Death OR Enemy Split
                     // Fizzle sound is on wrong cast only, shouldn't overlap
                     AudioClip spellClip = GetClipForSpell(cast.Value);
                     if (spellClip != null)
@@ -181,6 +181,6 @@ public class SpellCaster : MonoBehaviour
         if (sfxSource != null && fizzleClip != null)
             sfxSource.PlayOneShot(fizzleClip);
 
-        Debug.Log($"Fizzle! {spellToLock} locked for {fizzleLockoutDuration}s."); // If wrong, fizzle
+        Debug.Log("Fizzle! {spellToLock} locked for {fizzleLockoutDuration}s."); // If wrong, fizzle
     }
 }

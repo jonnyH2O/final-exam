@@ -11362,7 +11362,7 @@ MonoBehaviour:
   - {fileID: 1435121858}
   - {fileID: 1686869144}
   - {fileID: 209084489}
-  waveMessageText: {fileID: 943957308}
+  waveMessageText: {fileID: 0}
   waveProgressUI: {fileID: 1092207616}
   autoStart: 0
 --- !u!4 &1552605850

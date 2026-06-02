@@ -25,10 +25,11 @@ public class SplitEnemy : Enemy
     // any spell can be used on it.
     protected override void ApplyElementMaterial() { }
 
-    public override bool TakeCorrectHit()
+    public override bool TakeCorrectHit(SpellType castSpell)
     {
         SpawnChildren();
-        Die();        // play this enemy's hit VFX and remove itself
+        PlayHitVfxForSpell(castSpell);
+        Remove(); // play this enemy's hit VFX and remove itself
         return false; // the break itself isn't a scored kill; the children are
     }
 
