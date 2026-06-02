@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
     // Entry point for a correct (or accepted) spell hit. Returns true if the
     // hit killed the enemy, so the caster knows whether to award score.
     // Subclasses override to absorb hits (shield) or transform (split).
-    public virtual bool TakeCorrectHit()
+    public virtual bool TakeCorrectHit(SpellType castSpell)
     {
         Die();
         return true;
@@ -140,6 +140,19 @@ public class Enemy : MonoBehaviour
             _ => null
         };
 
+        PlayCenteredEffect(prefab);
+    }
+
+    public void PlayHitVfxForSpell(SpellType spell)
+    {
+        GameObject prefab = spell switch
+        {
+            SpellType.Fire => _natureHitEffect,
+            SpellType.Water => _fireHitEffect,
+            SpellType.Lightning => _waterHitEffect,
+            SpellType.Radiant => _shadowHitEffect,
+            _ => null
+        };
         PlayCenteredEffect(prefab);
     }
 

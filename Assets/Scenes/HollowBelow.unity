@@ -10956,9 +10956,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   waves:
-  - {fileID: 11400000, guid: 48201514260358d4da62fc10c7c01348, type: 2}
   - {fileID: 11400000, guid: 798b53d2f582f5d47bea0083b1e5bc9d, type: 2}
   - {fileID: 11400000, guid: f48fd291fdb8ca14296f5d7722d196dc, type: 2}
+  - {fileID: 11400000, guid: 48201514260358d4da62fc10c7c01348, type: 2}
   - {fileID: 11400000, guid: dc25da08c2117a549930568ec5c793b0, type: 2}
   - {fileID: 11400000, guid: b553fca726aa5c946ac7264a759e1e87, type: 2}
   spawnPoints:

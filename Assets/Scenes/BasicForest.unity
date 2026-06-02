@@ -11363,7 +11363,7 @@ MonoBehaviour:
   - {fileID: 1686869144}
   - {fileID: 209084489}
   waveMessageText: {fileID: 0}
-  waveProgressUI: {fileID: 0}
+  waveProgressUI: {fileID: 1092207616}
   autoStart: 0
 --- !u!4 &1552605850
 Transform:

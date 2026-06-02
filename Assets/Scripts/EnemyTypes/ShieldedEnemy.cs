@@ -25,7 +25,7 @@ public class ShieldedEnemy : Enemy
         ShowShield(); // re-arm on every spawn, including pool reuse
     }
 
-    public override bool TakeCorrectHit()
+    public override bool TakeCorrectHit(SpellType castSpell)
     {
         if (_shielded)
         {
@@ -33,7 +33,7 @@ public class ShieldedEnemy : Enemy
             return false;
         }
 
-        return base.TakeCorrectHit(); // second correct hit kills
+        return base.TakeCorrectHit(castSpell); // second correct hit kills
     }
 
     private void ShowShield()
