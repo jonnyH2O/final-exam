@@ -152,10 +152,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sfxSource: {fileID: 1533043}
   fizzleClip: {fileID: 8300000, guid: 43b2eda9d9df3c049b055b2aeb171feb, type: 3}
-  fireClip: {fileID: 0}
-  lightningClip: {fileID: 0}
-  waterClip: {fileID: 0}
-  radiantClip: {fileID: 0}
+  fireClip: {fileID: 8300000, guid: 0088b723a18567744ae0af25b51d0dae, type: 3}
+  lightningClip: {fileID: 8300000, guid: 6fb01e2ca6174cf4795f190f67841c3a, type: 3}
+  waterClip: {fileID: 8300000, guid: 83544a487d6e6844ea9889ba0879c33e, type: 3}
+  radiantClip: {fileID: 8300000, guid: 46633a003c0a81b4eb109c85b4282c82, type: 3}
   fizzleLockoutDuration: 1
   fizzleEffect: {fileID: 4809171458859421548, guid: 4e91ed1a8efe7044785b9bd97a47d87f, type: 3}
   fizzleEffectScale: 0.1
@@ -1405,7 +1405,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000061035156, y: -0.000030517578}
+  m_AnchoredPosition: {x: -0.000061035156, y: 0}
   m_SizeDelta: {x: 423.07104, y: 237.95984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &208943574
@@ -6486,7 +6486,7 @@ MonoBehaviour:
   ambienceFadeInDuration: 1.5
   musicFadeInDuration: 2.5
   ambienceTargetVolume: 0
-  musicTargetVolume: 0.07
+  musicTargetVolume: 0.05
 --- !u!4 &853288994
 Transform:
   m_ObjectHideFlags: 0
