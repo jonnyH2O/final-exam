@@ -3,7 +3,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private ElementType element;
-    [SerializeField] private float speed = 2f;
+    [SerializeField] protected float speed = 2f;
 
     [SerializeField] private Material _fireMaterial;
     [SerializeField] private Material _waterMaterial;
@@ -24,7 +24,7 @@ public class Enemy : MonoBehaviour
 
     private SkinnedMeshRenderer _meshRenderer;
     private MaterialPropertyBlock _mpb;
-    private WaveManager _waveManager;
+    protected WaveManager _waveManager;
     private Animator _animator;
 
     private bool _tutorialTriggered = false;
@@ -34,6 +34,13 @@ public class Enemy : MonoBehaviour
 
     public ElementType Element => element;
     public EnemyType EnemyType { get; private set; }
+
+    // Most enemies require the element's matching spell. SplitEnemy accepts any.
+    public virtual bool RequiresMatchingSpell => true;
+
+    // Pooled enemies return to the pool on removal; runtime-spawned ones
+    // (e.g. SplitEnemy children) are destroyed instead. WaveManager checks this.
+    public bool IsPooled { get; set; } = true;
 
     private void Awake()
     {
@@ -52,12 +59,12 @@ public class Enemy : MonoBehaviour
         ApplyElementMaterial();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (GameManager.IsPaused)
             return;
 
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        Move();
 
         if (!_tutorialTriggered && transform.position.x < 8f)
         {
@@ -68,6 +75,13 @@ public class Enemy : MonoBehaviour
                 TutorialManager.Instance.TryStartTutorial(this);
             }
         }
+    }
+
+    // Default movement: advance toward the tower. Subclasses (e.g. ZoomEnemy)
+    // override to weave; call base.Move() to keep advancing.
+    protected virtual void Move()
+    {
+        transform.Translate(Vector3.left * speed * Time.deltaTime);
     }
 
     public void SetEnemyType(EnemyType type)
@@ -98,9 +112,18 @@ public class Enemy : MonoBehaviour
         _waveManager?.NotifyEnemyRemoved(gameObject);
     }
 
+    // Entry point for a correct (or accepted) spell hit. Returns true if the
+    // hit killed the enemy, so the caster knows whether to award score.
+    // Subclasses override to absorb hits (shield) or transform (split).
+    public virtual bool TakeCorrectHit()
+    {
+        Die();
+        return true;
+    }
+
     // Killed by the correct spell: play the element's hit VFX, then remove.
     // KillZone escapes still call Remove() directly, so they stay silent.
-    public void Die()
+    public virtual void Die()
     {
         PlayDeathEffect();
         Remove();
@@ -123,12 +146,14 @@ public class Enemy : MonoBehaviour
     // Spawns a one-shot particle effect centered on the enemy's mesh, detached
     // so it survives this enemy being pooled/disabled. scale shrinks/grows it,
     // speed plays it faster (e.g. a quick, small fizzle puff on a wrong cast).
-    public void PlayCenteredEffect(GameObject prefab, float scale = 1f, float speed = 1f)
+    public void PlayCenteredEffect(GameObject prefab, float scale = 1f, float speed = 1f, Vector3 offset = default)
     {
         if (prefab == null) return;
 
-        // Enemy pivot is usually at the feet; use the mesh bounds center.
+        // Enemy pivot is usually at the feet; use the mesh bounds center, plus
+        // an optional world-space offset to lift it or push it toward camera.
         Vector3 spawnPos = _meshRenderer != null ? _meshRenderer.bounds.center : transform.position;
+        spawnPos += offset;
         GameObject vfx = Instantiate(prefab, spawnPos, Quaternion.identity);
 
         bool resize = !Mathf.Approximately(scale, 1f);
@@ -156,7 +181,9 @@ public class Enemy : MonoBehaviour
         Destroy(vfx, life);
     }
 
-    private void ApplyElementMaterial()
+    // Virtual so enemies like SplitEnemy can keep their own material (to signal
+    // that any spell works) instead of taking an elemental color.
+    protected virtual void ApplyElementMaterial()
     {
         if (_meshRenderer == null) return;
 
@@ -184,7 +211,13 @@ public class Enemy : MonoBehaviour
         {
             _animator.Play(0, -1, Random.value);
         }
+
+        OnInitialized();
     }
+
+    // Per-spawn hook, called after position/element/speed are set (covers pool
+    // reuse). Subclasses re-arm shields, pick lanes, etc.
+    protected virtual void OnInitialized() { }
 
     public void SetVisualOnly(ElementType newElement)
     {
