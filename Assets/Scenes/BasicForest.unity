@@ -2769,6 +2769,67 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4208458315195486, guid: c96016c34e7be62488e588470988ef5b, type: 3}
   m_PrefabInstance: {fileID: 617594234}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &334511168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 334511169}
+  - component: {fileID: 334511170}
+  m_Layer: 0
+  m_Name: EnemyPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &334511169
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334511168}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0142299, y: -5.1242504, z: 3.5200899}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 491920797}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &334511170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 334511168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10efcebc8c52cdf45b49b523214e77df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
+  poolEntries:
+  - enemyType: 0
+    prefab: {fileID: 2979958933507235093, guid: 2af92e6ea4ec7ea4c9d47ed3f04d134b, type: 3}
+    defaultCapacity: 10
+    maxSize: 20
+  - enemyType: 1
+    prefab: {fileID: 2979958933507235093, guid: 0bb3cfd3f957c5d47ae1e09420595946, type: 3}
+    defaultCapacity: 10
+    maxSize: 20
+  - enemyType: 4
+    prefab: {fileID: 2979958933507235093, guid: 3e9c7d9d303a4ee43a8fc21e21009044, type: 3}
+    defaultCapacity: 10
+    maxSize: 20
+  - enemyType: 2
+    prefab: {fileID: 2979958933507235093, guid: 0f4fcaa5836e41f4db96236eef05609e, type: 3}
+    defaultCapacity: 10
+    maxSize: 20
 --- !u!1001 &340207057
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4880,7 +4941,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1533042}
-  - {fileID: 962571711}
+  - {fileID: 334511169}
   - {fileID: 1552605850}
   - {fileID: 349438211}
   - {fileID: 1045451167}
@@ -8346,55 +8407,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ba258545da721e488ecb71ffd143b6f, type: 3}
---- !u!1 &962571709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 962571711}
-  - component: {fileID: 962571710}
-  m_Layer: 0
-  m_Name: EnemyPool
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &962571710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962571709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10efcebc8c52cdf45b49b523214e77df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyPool
-  poolEntries:
-  - enemyType: 0
-    prefab: {fileID: 2979958933507235093, guid: 2af92e6ea4ec7ea4c9d47ed3f04d134b, type: 3}
-    defaultCapacity: 10
-    maxSize: 20
---- !u!4 &962571711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 962571709}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0142299, y: -5.1242504, z: 3.5200899}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 491920797}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &991491945
 GameObject:
   m_ObjectHideFlags: 0
@@ -11354,17 +11366,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaveManager
   waves:
-  - {fileID: 11400000, guid: 1e4f53412aa094349a9dbe76464ee606, type: 2}
-  - {fileID: 11400000, guid: 86f2c5766728dbe4399a36372d52b02c, type: 2}
-  - {fileID: 11400000, guid: dbfa30a4feedc1b42a5f907d78f53a56, type: 2}
-  - {fileID: 11400000, guid: 11e977f65a0c98e4d9c74266e82f0546, type: 2}
+  - {fileID: 11400000, guid: a654bc4c81dd8df4989d5ea1bdb45c90, type: 2}
+  - {fileID: 11400000, guid: 6f22b379330f0614e9afdf9f2c837e7c, type: 2}
+  - {fileID: 11400000, guid: 39d6980b203a3f048a6cbdda3f108a90, type: 2}
+  - {fileID: 11400000, guid: dc8e16c8e17c5954b83ce04b256a6454, type: 2}
+  - {fileID: 11400000, guid: 0a37410e54ba905489dd72d28ccc9c78, type: 2}
   spawnPoints:
   - {fileID: 1861314575}
   - {fileID: 478924564}
   - {fileID: 1435121858}
   - {fileID: 1686869144}
   - {fileID: 209084489}
-  waveMessageText: {fileID: 0}
+  waveMessageText: {fileID: 943957308}
   waveProgressUI: {fileID: 1092207616}
   autoStart: 0
 --- !u!4 &1552605850
