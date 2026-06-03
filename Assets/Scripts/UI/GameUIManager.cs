@@ -14,6 +14,7 @@ public class GameUIManager : MonoBehaviour
 
     [SerializeField] private TMP_Text retryText;
     [SerializeField] private TMP_Text continueText;
+    [SerializeField] private bool isFinalLevel = false;
 
     private bool waitingForContinue;
     private bool waitingForRetry;
@@ -148,6 +149,23 @@ public class GameUIManager : MonoBehaviour
         yield return new WaitForSecondsRealtime(0.1f);
 
         GameManager.IsPaused = false;
+
+        if (isFinalLevel)
+        {
+            if (CinematicTransition.Instance != null)
+            {
+                CinematicTransition.Instance.LoadSceneWithTransition(
+                    "EndingCutscene",
+                    "PEACE RETURNS..."
+                );
+            }
+            else
+            {
+                SceneManager.LoadScene("EndingCutscene");
+            }
+
+            yield break;
+        }
 
         int nextIndex =
             SceneManager.GetActiveScene().buildIndex + 1;

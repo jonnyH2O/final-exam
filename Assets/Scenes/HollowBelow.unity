@@ -23010,6 +23010,7 @@ MonoBehaviour:
   fullClearText: {fileID: 771490427}
   retryText: {fileID: 1831220899}
   continueText: {fileID: 1718711794}
+  isFinalLevel: 1
 --- !u!1001 &1926815618
 PrefabInstance:
   m_ObjectHideFlags: 0
