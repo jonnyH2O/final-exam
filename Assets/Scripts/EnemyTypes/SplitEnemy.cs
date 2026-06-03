@@ -21,6 +21,9 @@ public class SplitEnemy : Enemy
     // Any spell cracks the split sprite open.
     public override bool RequiresMatchingSpell => false;
 
+    // Hits harder than a basic enemy if it slips past and reaches the tower.
+    public override int TowerDamage => 2;
+
     // Keep the prefab's own (non-elemental) material so its colors signal that
     // any spell can be used on it.
     protected override void ApplyElementMaterial() { }

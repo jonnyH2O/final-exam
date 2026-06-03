@@ -38,6 +38,9 @@ public class Enemy : MonoBehaviour
     // Most enemies require the element's matching spell. SplitEnemy accepts any.
     public virtual bool RequiresMatchingSpell => true;
 
+    // Damage dealt to the tower if this enemy reaches it (KillZone reads this).
+    public virtual int TowerDamage => 1;
+
     // Pooled enemies return to the pool on removal; runtime-spawned ones
     // (e.g. SplitEnemy children) are destroyed instead. WaveManager checks this.
     public bool IsPooled { get; set; } = true;
