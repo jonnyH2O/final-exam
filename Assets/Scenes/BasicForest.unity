@@ -1142,8 +1142,8 @@ RectTransform:
   m_GameObject: {fileID: 157612537}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 145.12}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 991491946}
   - {fileID: 295898580}
@@ -1152,7 +1152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -225, y: -65}
+  m_AnchoredPosition: {x: -225, y: -85}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157612539
@@ -1886,6 +1886,7 @@ GameObject:
   - component: {fileID: 272929541}
   - component: {fileID: 272929540}
   - component: {fileID: 272929539}
+  - component: {fileID: 272929542}
   m_Layer: 5
   m_Name: Water
   m_TagString: Untagged
@@ -1996,6 +1997,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 272929537}
   m_CullTransparentMesh: 1
+--- !u!114 &272929542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272929537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6be35a6dce1f4e8eb023c25ca196c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellSlotUI
+  spell: 1
+  background: {fileID: 272929540}
+  icon: {fileID: 258247000}
+  keybindText: {fileID: 1336167739}
+  keybindLabel: E
+  normalBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  normalIconColor: {r: 1, g: 1, b: 1, a: 1}
+  lockedColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
 --- !u!1001 &276050072
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3368,6 +3389,7 @@ GameObject:
   - component: {fileID: 352776015}
   - component: {fileID: 352776014}
   - component: {fileID: 352776013}
+  - component: {fileID: 352776016}
   m_Layer: 5
   m_Name: Lightning
   m_TagString: Untagged
@@ -3478,6 +3500,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 352776011}
   m_CullTransparentMesh: 1
+--- !u!114 &352776016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352776011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6be35a6dce1f4e8eb023c25ca196c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellSlotUI
+  spell: 2
+  background: {fileID: 352776014}
+  icon: {fileID: 397079880}
+  keybindText: {fileID: 771643446}
+  keybindLabel: W
+  normalBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  normalIconColor: {r: 1, g: 0.9725491, b: 0.8352942, a: 1}
+  lockedColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
 --- !u!1 &360925350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,8 +3599,8 @@ RectTransform:
   m_GameObject: {fileID: 373701946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1788423360}
   - {fileID: 1667070099}
@@ -3566,7 +3608,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1200, y: -50}
+  m_AnchoredPosition: {x: 1200, y: -80}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &373701948
@@ -4007,7 +4049,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -6477,7 +6519,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -7412,7 +7454,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -7581,7 +7623,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 319679786}
   - {fileID: 943957307}
@@ -8918,8 +8960,8 @@ RectTransform:
   m_GameObject: {fileID: 1079462219}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1958674503}
   - {fileID: 352776012}
@@ -8929,7 +8971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -285, y: -90}
+  m_AnchoredPosition: {x: -317, y: -110}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1079462221
@@ -8950,7 +8992,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: 0
+  m_Spacing: 7.7
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
@@ -10348,7 +10390,7 @@ MonoBehaviour:
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0
-  m_TextWrappingMode: 1
+  m_TextWrappingMode: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
   m_linkedTextComponent: {fileID: 0}
@@ -10690,6 +10732,7 @@ GameObject:
   - component: {fileID: 1389954101}
   - component: {fileID: 1389954100}
   - component: {fileID: 1389954099}
+  - component: {fileID: 1389954102}
   m_Layer: 5
   m_Name: Radiant
   m_TagString: Untagged
@@ -10800,6 +10843,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389954097}
   m_CullTransparentMesh: 1
+--- !u!114 &1389954102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1389954097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6be35a6dce1f4e8eb023c25ca196c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellSlotUI
+  spell: 3
+  background: {fileID: 1389954100}
+  icon: {fileID: 1038148056}
+  keybindText: {fileID: 860971572}
+  keybindLabel: R
+  normalBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  normalIconColor: {r: 1, g: 1, b: 0.7490196, a: 1}
+  lockedColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
 --- !u!1001 &1393952966
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14506,14 +14569,14 @@ RectTransform:
   m_GameObject: {fileID: 1925857374}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 881180064}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -350, y: -65}
+  m_AnchoredPosition: {x: -400, y: -85}
   m_SizeDelta: {x: 120, y: 120}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1925857376
@@ -14677,6 +14740,7 @@ GameObject:
   - component: {fileID: 1958674506}
   - component: {fileID: 1958674505}
   - component: {fileID: 1958674504}
+  - component: {fileID: 1958674507}
   m_Layer: 5
   m_Name: Fire
   m_TagString: Untagged
@@ -14787,6 +14851,26 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1958674502}
   m_CullTransparentMesh: 1
+--- !u!114 &1958674507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1958674502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42c6be35a6dce1f4e8eb023c25ca196c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpellSlotUI
+  spell: 0
+  background: {fileID: 1958674505}
+  icon: {fileID: 848976631}
+  keybindText: {fileID: 429874123}
+  keybindLabel: Q
+  normalBackgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  normalIconColor: {r: 1, g: 1, b: 1, a: 1}
+  lockedColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
 --- !u!4 &1963745436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4208458315195486, guid: c96016c34e7be62488e588470988ef5b, type: 3}
@@ -15035,15 +15119,15 @@ RectTransform:
   m_GameObject: {fileID: 1995299263}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1683373382}
   m_Father: {fileID: 881180064}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: -350, y: -65}
+  m_AnchoredPosition: {x: -400, y: -85}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1995299265
