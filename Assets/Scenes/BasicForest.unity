@@ -8814,6 +8814,7 @@ MonoBehaviour:
   fullClearText: {fileID: 2090520935}
   retryText: {fileID: 350275891}
   continueText: {fileID: 290670452}
+  isFinalLevel: 0
 --- !u!1001 &1057450343
 PrefabInstance:
   m_ObjectHideFlags: 0
