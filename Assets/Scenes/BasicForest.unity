@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   sfxSource: {fileID: 1533043}
   fizzleClip: {fileID: 8300000, guid: 43b2eda9d9df3c049b055b2aeb171feb, type: 3}
-  fireClip: {fileID: 8300000, guid: 0088b723a18567744ae0af25b51d0dae, type: 3}
+  fireClip: {fileID: 8300000, guid: c12281e1634d57e478da8faab935d5b4, type: 3}
   lightningClip: {fileID: 8300000, guid: 6fb01e2ca6174cf4795f190f67841c3a, type: 3}
   waterClip: {fileID: 8300000, guid: 83544a487d6e6844ea9889ba0879c33e, type: 3}
   radiantClip: {fileID: 8300000, guid: 46633a003c0a81b4eb109c85b4282c82, type: 3}
