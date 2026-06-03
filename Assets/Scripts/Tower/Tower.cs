@@ -17,8 +17,6 @@ public class Tower : MonoBehaviour
     {
         currentHP -= amount;
 
-        Debug.Log("Tower took damage! HP: " + currentHP);
-
         if (currentHP <= 0)
         {
             currentHP = 0;
@@ -33,8 +31,6 @@ public class Tower : MonoBehaviour
 
     private void GameOver()
     {
-        Debug.Log("Game Over");
-
         if (GameUIManager.Instance != null)
         {
             GameUIManager.Instance.ShowGameOver();
