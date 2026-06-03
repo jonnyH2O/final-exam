@@ -163,7 +163,7 @@ public class GameUIManager : MonoBehaviour
             {
                 CinematicTransition.Instance.LoadSceneWithTransition(
                     nextScene,
-                    "VENTURING DEEPER INTO THE FOREST..."
+                    "THE TEST CONTINUES IN A NEW DOMAIN..."
                 );
             }
             else

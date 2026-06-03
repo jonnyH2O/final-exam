@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyEntries:
   - enemyType: 0
     count: 2
-  enemySpeed: 3
-  spawnInterval: 2
+  enemySpeed: 2
+  spawnInterval: 1
   waveDelay: 2
   waveStartMessage: The practice exam begins...

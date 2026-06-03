@@ -18,7 +18,7 @@ MonoBehaviour:
   enemyEntries:
   - enemyType: 0
     count: 5
-  enemySpeed: 4
-  spawnInterval: 2
+  enemySpeed: 3
+  spawnInterval: 1
   waveDelay: 3
   waveStartMessage: '"Now let''s see your radiant spell."'

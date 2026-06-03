@@ -17,8 +17,8 @@ MonoBehaviour:
   randomElementPool: 020000000100000000000000
   enemyEntries:
   - enemyType: 0
-    count: 3
-  enemySpeed: 4
-  spawnInterval: 2
+    count: 5
+  enemySpeed: 2.5
+  spawnInterval: 1
   waveDelay: 3
   waveStartMessage: Professor Varn watches silently...
