@@ -49,6 +49,12 @@ public class SpellCaster : MonoBehaviour
         { ElementType.Shadow,  SpellType.Radiant },
     };
 
+    public static SpellCaster Instance { get; private set; }
+    private void Awake()
+    {
+        Instance = this;
+    }
+    
     private void Update()
     {
         SpellType? cast = null; // Nullable type to represent no spell cast
@@ -169,6 +175,13 @@ public class SpellCaster : MonoBehaviour
     private bool IsSpellLocked(SpellType spell)
     {
         return _spellLockouts.TryGetValue(spell, out float endTime) && Time.time < endTime;
+    }
+
+    public float GetLockoutRemaining(SpellType spell)
+    {
+        if (_spellLockouts.TryGetValue(spell, out float endTime))
+            return Mathf.Max(0f, endTime - Time.time);
+        return 0f;
     }
 
     private void Fizzle(SpellType spellToLock)
