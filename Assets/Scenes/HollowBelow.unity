@@ -591,8 +591,8 @@ MonoBehaviour:
   ambienceSource: {fileID: 482964230}
   musicSource: {fileID: 920538431}
   musicStartDelay: 5
-  ambienceFadeInDuration: 1.5
-  musicFadeInDuration: 2.5
+  ambienceFadeInDuration: 0
+  musicFadeInDuration: 0
   ambienceTargetVolume: 0
   musicTargetVolume: 0.07
 --- !u!4 &16485895

@@ -5,6 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame(string sceneName)
     {
+        LevelAudioManager.Instance?.FadeOutAll();
         if (CinematicTransition.Instance != null)
         {
             CinematicTransition.Instance.LoadSceneWithTransition(
@@ -20,6 +21,7 @@ public class MainMenu : MonoBehaviour
 
     public void LoadLevel(string sceneName)
     {
+        LevelAudioManager.Instance?.FadeOutAll();
         if (CinematicTransition.Instance != null)
         {
             CinematicTransition.Instance.LoadSceneWithTransition(

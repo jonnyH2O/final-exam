@@ -239,6 +239,8 @@ public class WaveManager : MonoBehaviour
             if (_currentWaveIndex >= waves.Count)
             {
                 Debug.Log("All waves complete!");
+                
+                LevelAudioManager.Instance?.FadeOutAll();
 
                 // Show the level complete UI if all waves are finished
                 if (GameUIManager.Instance != null)

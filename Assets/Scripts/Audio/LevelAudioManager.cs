@@ -16,6 +16,9 @@ using UnityEngine;
 /// </summary>
 public class LevelAudioManager : MonoBehaviour
 {
+
+    public static LevelAudioManager Instance;
+
     [Header("AudioSources")]
     [Tooltip("Looping ambience track - Leave empty if this level has no ambience")]
     [SerializeField] private AudioSource ambienceSource;
@@ -34,12 +37,24 @@ public class LevelAudioManager : MonoBehaviour
     [Tooltip("Time for music to ramp from silent to target volume")]
     [SerializeField] private float musicFadeInDuration = 2.5f;
 
+    [Header("Fade out durations")]
+    [Tooltip("Time for ambience to fade out")]
+    [SerializeField] private float ambienceFadeOutDuration = 3f;
+
+    [Tooltip("Time for music to fade out")]
+    [SerializeField] private float musicFadeOutDuration = 3f;
+
     [Header("Target Volumes")]
     [Range(0f, 1f)]
     [SerializeField] private float ambienceTargetVolume = 0.6f;
 
     [Range(0f, 1f)]
     [SerializeField] private float musicTargetVolume = 0.7f;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void Start()
     {
@@ -78,5 +93,28 @@ public class LevelAudioManager : MonoBehaviour
             yield return null;
         }
         source.volume = targetVolume;
+    }
+
+    public void FadeOutAll()
+    {
+        if (ambienceSource != null && ambienceSource.isPlaying)
+            StartCoroutine(FadeOut(ambienceSource, ambienceFadeOutDuration));
+
+        if (musicSource != null && musicSource.isPlaying)
+            StartCoroutine(FadeOut(musicSource, musicFadeOutDuration));
+    }
+
+    private IEnumerator FadeOut(AudioSource source, float duration)
+    {
+        float startVolume = source.volume;
+        float elapsed = 0f;
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume,0f, elapsed / duration);
+            yield return null;
+        }
+        source.volume = 0f;
+        source.Stop();
     }
 }
