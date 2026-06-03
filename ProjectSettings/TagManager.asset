@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
+  - ScoreText
+  - ComboText
   layers:
   - Default
   - TransparentFX

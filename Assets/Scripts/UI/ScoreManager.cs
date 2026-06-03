@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -81,5 +82,22 @@ public class ScoreManager : MonoBehaviour
 
         if (comboText != null)
             comboText.text = $"Combo x{combo}";
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        scoreText = GameObject.FindWithTag("ScoreText")?.GetComponent<TMP_Text>();
+        comboText = GameObject.FindWithTag("ComboText")?.GetComponent<TMP_Text>();
+
+        UpdateUI();
     }
 }
