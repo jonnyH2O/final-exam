@@ -15,7 +15,7 @@ public class KillZone : MonoBehaviour
         Enemy enemy = other.GetComponent<Enemy>(); 
         if (enemy != null)
         {
-            tower.TakeDamage(1);
+            tower.TakeDamage(enemy.TowerDamage);
             enemy.Remove();
         }
     }
