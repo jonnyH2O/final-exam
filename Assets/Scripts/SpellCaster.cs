@@ -153,7 +153,6 @@ public class SpellCaster : MonoBehaviour
             // Quick, small smoke puff on the target to telegraph the miss.
             target.PlayCenteredEffect(fizzleEffect, fizzleEffectScale, fizzleEffectSpeed);
 
-            Debug.Log("Fizzle!"); // If wrong, fizzle
             // Wrong spell, triggers a fizzle which starts, or restarts, lockout
             Fizzle(required);
         }
@@ -193,7 +192,5 @@ public class SpellCaster : MonoBehaviour
         // Play the fizzle SFX.
         if (sfxSource != null && fizzleClip != null)
             sfxSource.PlayOneShot(fizzleClip);
-
-        Debug.Log("Fizzle! {spellToLock} locked for {fizzleLockoutDuration}s."); // If wrong, fizzle
     }
 }

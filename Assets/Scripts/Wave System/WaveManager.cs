@@ -62,8 +62,6 @@ public class WaveManager : MonoBehaviour
             ? overrideDelay
             : (waveIndex > 0 ? waves[waveIndex - 1].waveDelay : 0f);
 
-        Debug.Log($"Next wave in {delay} seconds...");
-
         yield return new WaitForSeconds(delay);
 
         StartCoroutine(SpawnWave(data, waveIndex));
@@ -238,8 +236,6 @@ public class WaveManager : MonoBehaviour
 
             if (_currentWaveIndex >= waves.Count)
             {
-                Debug.Log("All waves complete!");
-                
                 LevelAudioManager.Instance?.FadeOutAll();
 
                 // Show the level complete UI if all waves are finished
@@ -250,8 +246,6 @@ public class WaveManager : MonoBehaviour
             }
             else
             {
-                Debug.Log($"Wave cleared! Starting wave {_currentWaveIndex + 1}.");
-
                 StartCoroutine(NextWaveDelay(waves[_currentWaveIndex], _currentWaveIndex));
             }
         }
