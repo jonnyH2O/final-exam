@@ -7,22 +7,29 @@ public class TargetManager : MonoBehaviour
     // Singleton 
     public static TargetManager Instance { get; private set; } 
 
-    // Private Fields 
+    // Private Fields
     private Enemy currentTarget;
+    private Camera _camera;
 
-    // Public Properties 
+    // Public Properties
     public Enemy CurrentTarget => currentTarget;
 
-    // Unity Lifecycle 
+    // Unity Lifecycle
     private void Awake()
     {
         Instance = this;
+        // Cache the camera. Camera.main does a tagged scene search on every
+        // access, so caching it avoids that cost every frame.
+        _camera = Camera.main;
     }
 
     private void Update()
     {
+        if (_camera == null) _camera = Camera.main;
+        if (_camera == null) return;
+
         // Cast a ray from the camera through the mouse cursor each frame
-        Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+        Ray ray = _camera.ScreenPointToRay(Mouse.current.position.ReadValue());
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {

@@ -15,6 +15,11 @@ namespace LowPolyWater
         Mesh mesh;
         Vector3[] vertices;
 
+        // Per-vertex wave phase, precomputed once. The distance term only depends
+        // on the (static) vertex XZ position and wave settings, so recomputing it
+        // every frame (a sqrt + modulo per vertex) was pure waste on WebGL.
+        float[] phases;
+
         private void Awake()
         {
             //Get the Mesh Filter of the gameobject
@@ -24,6 +29,23 @@ namespace LowPolyWater
         void Start()
         {
             CreateMeshLowPoly(meshFilter);
+            PrecomputePhases();
+            // Hint to the engine that this mesh changes often. Only needs to be
+            // set once, not every frame.
+            mesh.MarkDynamic();
+        }
+
+        void PrecomputePhases()
+        {
+            phases = new float[vertices.Length];
+            for (int i = 0; i < vertices.Length; i++)
+            {
+                Vector3 v = vertices[i];
+                v.y = 0.0f;
+                float distance = Vector3.Distance(v, waveOriginPosition);
+                distance = (distance % waveLength) / waveLength;
+                phases[i] = Mathf.PI * 2.0f * distance;
+            }
         }
 
         /// <summary>
@@ -72,30 +94,25 @@ namespace LowPolyWater
         /// </summary>
         void GenerateWaves()
         {
+            //Time term is the same for every vertex, so compute it once per frame
+            float timePhase = Time.time * Mathf.PI * 2.0f * waveFrequency;
+
             for (int i = 0; i < vertices.Length; i++)
             {
                 Vector3 v = vertices[i];
 
-                //Initially set the wave height to 0
-                v.y = 0.0f;
-
-                //Get the distance between wave origin position and the current vertex
-                float distance = Vector3.Distance(v, waveOriginPosition);
-                distance = (distance % waveLength) / waveLength;
-
                 //Oscilate the wave height via sine to create a wave effect
-                v.y = waveHeight * Mathf.Sin(Time.time * Mathf.PI * 2.0f * waveFrequency
-                + (Mathf.PI * 2.0f * distance));
-                
+                v.y = waveHeight * Mathf.Sin(timePhase + phases[i]);
+
                 //Update the vertex
                 vertices[i] = v;
             }
 
-            //Update the mesh properties
+            //Update the mesh properties. RecalculateNormals is kept so lighting on
+            //the waves stays correct; MarkDynamic / meshFilter.mesh reassignment were
+            //redundant per-frame work and have been moved to Start / removed.
             mesh.vertices = vertices;
             mesh.RecalculateNormals();
-            mesh.MarkDynamic();
-            meshFilter.mesh = mesh;
         }
     }
 }
